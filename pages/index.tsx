@@ -66,7 +66,7 @@ const Index = () => {
   return (
     <Container>
       <div className='text-center mt-2'>
-        <h2>Terabox Dw</h2>
+        <h2>Teriyaki Box</h2>
       </div>
 
       <Form onSubmit={handleGetDetail}>
