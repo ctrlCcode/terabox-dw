@@ -10,22 +10,44 @@ const Index = () => {
   const [isLoading, setLoading] = useState<KeyValue>({})
   const [urlDownload, setUrlDownload] = useState<KeyValue>({})
 
+  // const handleGetDetail = async (event: any) => {
+  //   event.preventDefault();
+
+  //   setUrlDownload({})
+
+  //   setLoading({ ...isLoading, ['main']: true })
+  //   const response = await axios.post("/api/getDetail", { url: url })
+  //   setLoading({ ...isLoading, ['main']: false })
+
+  //   if (response.data.result == false) {
+  //     return
+  //   }
+
+  //   const parsed: DetailData = response.data.data
+  //   setDetailData(parsed)
+  // }
+
   const handleGetDetail = async (event: any) => {
     event.preventDefault();
-
-    setUrlDownload({})
-
-    setLoading({ ...isLoading, ['main']: true })
-    const response = await axios.post("/api/getDetail", { url: url })
-    setLoading({ ...isLoading, ['main']: false })
-
-    if (response.data.result == false) {
-      setLoading({ ...isLoading, ['main']: false })
-      return
+  
+    setUrlDownload({});
+  
+    setLoading({ ...isLoading, ['main']: true });
+  
+    try {
+      const response = await axios.post("/api/getDetail", { url: url });
+  
+      if (response.data.result == false) {
+        return;
+      }
+  
+      const parsed: DetailData = response.data.data;
+      setDetailData(parsed);
+    } catch (error) {
+      // Handle the error here
+    } finally {
+      setLoading({ ...isLoading, ['main']: false });
     }
-
-    const parsed: DetailData = response.data.data
-    setDetailData(parsed)
   }
 
   const CardItem = (data: DetailData, fsItem: FSItem) => {
