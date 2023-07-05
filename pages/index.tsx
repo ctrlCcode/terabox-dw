@@ -53,7 +53,7 @@ const Index = () => {
       <Card.Body>
         <Card.Title>{fsItem.filename}</Card.Title>
         <Card.Text>
-          {Math.round(Number(fsItem.size) * 100) / 100} MB
+          {Math.round(Number(fsItem.size)) / 1000000} MB
         </Card.Text>
         <Button variant="primary" onClick={getUrlDownload} disabled={isLoading[fsItem.fs_id]}>
           Get Download URL {isLoading[fsItem.fs_id] && <Spinner className='ms-2' as="span" animation="border" size="sm" />}
