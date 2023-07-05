@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import { Button, Card, Container, Form, Spinner } from 'react-bootstrap';
 import { useRef, useState } from 'react';
+import Swal from 'sweetalert2';
 import axios from 'axios';
 const qs = require('qs')
 
@@ -38,13 +39,30 @@ const Index = () => {
       const response = await axios.post("/api/getDetail", { url: url });
   
       if (response.data.result == false) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: response.data.message,
+        });
         return;
+      }else{
+        //swal success
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Success get data',
+        })
       }
   
       const parsed: DetailData = response.data.data;
       setDetailData(parsed);
     } catch (error) {
-      // Handle the error here
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+      });
+      return;
     } finally {
       setLoading({ ...isLoading, ['main']: false });
     }
