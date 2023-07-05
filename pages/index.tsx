@@ -20,6 +20,7 @@ const Index = () => {
     setLoading({ ...isLoading, ['main']: false })
 
     if (response.data.result == false) {
+      setLoading({ ...isLoading, ['main']: false })
       return
     }
 
@@ -52,7 +53,7 @@ const Index = () => {
       <Card.Body>
         <Card.Title>{fsItem.filename}</Card.Title>
         <Card.Text>
-          {Number(fsItem.size) / 1000000} MB
+          {(Number(fsItem.size) / 1000000).toFixed(2)} MB
         </Card.Text>
         <Button variant="primary" onClick={getUrlDownload} disabled={isLoading[fsItem.fs_id]}>
           Get Download URL {isLoading[fsItem.fs_id] && <Spinner className='ms-2' as="span" animation="border" size="sm" />}
